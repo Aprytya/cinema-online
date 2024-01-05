@@ -1,0 +1,72 @@
+.title{
+    color: #FFF;
+    font-family: sen;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 87px;
+    margin-left: 96px;
+}
+
+.photo{
+    margin-left: 94px;
+    margin-top: 30px;
+    width: 180px;
+    height: 221.786px;
+    flex-shrink: 0;
+}
+
+.k-title{
+    color: #CD2E71;
+    font-family: sen;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 30px;
+}
+
+.isi{
+    color: #616161;
+    font-family: sen;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.square-box{
+    width: 419px;
+    height: 101px;
+    flex-shrink: 0;
+    background-color: rgba(205, 46, 113, 0.44);
+    margin-left: 96px;
+    margin-top: 30px;
+    padding: 14px;
+}
+
+.kata{
+    color: #CD2E71;
+    font-family: sen;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    margin-top: 14px;
+}
+
+.button{
+    width: 112px;
+    height: "19px";
+    border-radius: 2px;
+    opacity: 0.4;
+    background: #00FF47;
+    color: #00FF47;
+    text-align: center;
+    font-family: sen;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-left: 189px;
+}

@@ -1,0 +1,57 @@
+.frond-container-dark {
+    background-color: #151515;
+    opacity: 0.6;
+    width: 1081px;
+    height: 437px;
+    margin-left: 120px;
+    margin-top: 60px;
+    bottom: 0px;
+    
+}
+   
+.title{
+    width: 160px;
+    font-family: sen;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 900;
+    text-align: left;
+    background: linear-gradient(to bottom, #A52620, 50%,  #FFFFFF 50% 50%,  #FFFFFF 50%);
+    -webkit-background-clip: text;
+    color : transparent;
+    
+}
+
+.genre{
+    color: #FFF;
+    text-align: left;
+    font-family: sen;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 900;
+}
+
+.price{
+    color: #CD2E71;
+    text-align: left;
+    font-family: sen;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 900;
+
+}
+
+.desc{
+    width: 681px;
+    color: #FFF;
+    font-family: sen;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px;
+    margin-top: 12px;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+

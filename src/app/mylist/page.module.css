@@ -1,0 +1,20 @@
+.title{
+    color: #FFF;
+    font-family: sen;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 87px;
+    margin-left: 97px;
+}
+
+.list{
+    width: 180px;
+    height: 250px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: lightgray 50% / cover no-repeat;
+    margin-top: 67px;
+    margin-left: 40px;
+}

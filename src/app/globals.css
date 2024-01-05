@@ -1,0 +1,15 @@
+@font-face {
+  font-family: sen;
+  src: url(../assets/font/Sen/Sen-VariableFont_wght.ttf);
+}
+
+:root {
+  --background-primary: #151515;
+  --font-color: #FFF
+}
+
+body {
+  font-family: sen;
+  background-color: var(--background-primary);
+  color: var(--font-color)
+}

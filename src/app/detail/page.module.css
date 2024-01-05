@@ -1,0 +1,65 @@
+.container{
+    display: flex; 
+}
+
+.btn{
+    margin-top: 60px;
+}
+
+.detail{
+    width: 349px;
+    height: 485px;
+    flex-shrink: 0;
+    margin-top: 79px;
+    border-radius: 5px;
+    background:  lightgray 50% / cover no-repeat;
+    align-items: right;
+}
+
+.title{
+    color: #FFF;
+    font-family: sen;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    margin-top: 56px;
+    margin-right: 460px;
+    justify-content: space-between; 
+}
+
+.preivew{
+    width: 836px;
+    height: 275px;
+    flex-shrink: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), lightgray 50% / cover no-repeat;
+    margin-top: 35px;
+}
+
+.genre{
+color: #7E7E7E;
+text-align: left;
+font-family: sen;
+font-size: 24px;
+font-style: normal;
+font-weight: 800;
+line-height: 48px;
+}
+
+.price{
+    color: #CD2E71;
+    font-family: sen;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 48px; 
+}
+
+.desc{
+    color: #FFF;
+    font-family: sen;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 48px;
+}
