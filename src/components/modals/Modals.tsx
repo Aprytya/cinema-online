@@ -83,8 +83,10 @@ const LoginRegisterModal = ({show, onHide}:Props) => {
     if (isLogin) {
       console.log('email:', email);
       console.log('Password:', password);
-      if (email === "aprytya@gmail.com" && password === "admin1234" ) {
+      if (email === "aprytya@gmail.com" && password === "aprytya" ) {
        router.push("/dashboard")
+      }else if(email === "admin@gmail.com" && password === "admin1234"){
+        router.push("/admin")
       } else {
         alert("Login Failed!!, Plase Check your Email and Password")
       }

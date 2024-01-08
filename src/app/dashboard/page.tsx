@@ -8,7 +8,7 @@ import { Container, Row } from 'react-bootstrap';
 import DeadPool from '../../assets/deadpool.png';
 import InsideOut from '../../assets/inside out 2.png';
 
-const Homepage = () => {
+const Admin = () => {
   const [bannerData, setBannerData] = useState<Array<DetailCarrousel>>([
     {
       id: 1,
@@ -46,5 +46,5 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default Admin;
 

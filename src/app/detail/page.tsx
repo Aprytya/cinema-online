@@ -9,22 +9,38 @@ import Image from "next/image";
 import ButtonPrimary from "@/components/buttons/ButtonPrimary";
 import PaymentModal from "@/components/modals/PayModal";
 import { useState } from "react";
-
+import PlayButton from "../../../public/play.png"
 
 
 const Detail = () => {
     const [showPay, setShowPay] = useState(false);
     const [showDetail, setShowDetail] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
+    const [hasPurchased, setHasPurchased] = useState(false);
+    const [videoUrl, setVideoUrl] = useState('https://www.imdb.com/video/vi734511385/?playlistId=tt1361336&ref_=ext_shr_lnk');
+    
+    const handlePlay = () =>{
+        if (!hasPurchased){
+            alert("please buy this film if you want to watch")
+        }else{
+            playVideo();
+        }
+    };
+
+    const playVideo = () => {
+        window.open(videoUrl, '_blank');
+        };
 
     const handlePay = () => {
         setShowPopup(true);
         setShowPay(true);
-    }
+        setHasPurchased(true)
+        setVideoUrl('https://www.imdb.com/video/vi734511385/?playlistId=tt1361336&ref_=ext_shr_lnk');
+    };
 
     const handleClose = () => {
         setShowPay(false);
-    }
+    };
 
     const handleClientClick = () => {
         setShowDetail(true);
@@ -36,6 +52,7 @@ const Detail = () => {
         <Row>
         <Col className={`${styles["img"]} col-4`}> 
         <Image src={ListDetail} alt="detail" className={styles["detail"]}/>
+       
         </Col>
         <Col>
         <div  className={styles["container"]}>
@@ -54,6 +71,7 @@ const Detail = () => {
             marginBottom:"13px"
         }}>
             <Image src={Preview} alt="preview" className={styles["preview"]}/>
+             <button onClick={handlePlay} className={styles["play"]}><Image src={PlayButton} alt="play button" /></button>
         </div> 
         
         <div style={{
