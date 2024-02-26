@@ -48,7 +48,6 @@ const Detail = () => {
     }
     return(
     <Container>
-        <NavbarAfter/>
         <Row>
         <Col className={`${styles["img"]} col-4`}> 
         <Image src={ListDetail} alt="detail" className={styles["detail"]}/>

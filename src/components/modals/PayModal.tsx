@@ -15,7 +15,6 @@ interface Props{
     handleClientClick:()=>void;
 }
 
-
 const PaymentModal = ({show, handleClose, handleClientClick }:Props) => {
   const [showPay, setShowPay] = useState(false);
   const [showPopup, setShowPopup] = useState(false);

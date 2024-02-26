@@ -4,6 +4,8 @@ import style from "./carrousel.module.css";
 import Image from 'next/image';
 import  Carousel from 'react-bootstrap/Carousel';
 import ButtonPrimary from '../buttons/ButtonPrimary';
+import LoginRegisterModal from '../modals/Modals';
+import { useState } from "react";
 
 interface PropsCarrousel {
     data: Array<DetailCarrousel>
@@ -19,6 +21,24 @@ export interface DetailCarrousel{
 }
 
 function CarouselPrimary ({data}:PropsCarrousel){
+    const [showLogin, setShowLoginModal] = useState<boolean>(false);
+    const [showRegister, setShowRegisterModal] = useState(false);
+
+
+  const handleLogin = () => {
+    setShowLoginModal(true);
+  };
+
+
+  const handleRegister = () => {
+    setShowRegisterModal(true);
+  };
+
+  const handleClose = () => {
+    setShowLoginModal(false);
+    setShowRegisterModal(false);
+  };
+    
     return (
     <Carousel fade className={style["frond-container-dark"]} >
     {data.map((item: DetailCarrousel) => {
@@ -35,11 +55,12 @@ function CarouselPrimary ({data}:PropsCarrousel){
         <h5 className={style["price"]}>{item.price}</h5>
         <p className={style["desc"]}>{item.desc}</p>
         <ButtonPrimary
+            onClick={handleLogin}
             width='100px'
             height='40px'
-            name={'Buy Now'}
-            />
+            name={'Buy Now'} />
     </Carousel.Caption>
+       
     </Carousel.Item>
     )}
     )}

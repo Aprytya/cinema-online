@@ -1,133 +1,131 @@
-// 'use client'
-
-// import React, { useState } from "react";
-// import { Modal} from 'react-bootstrap';
-// import styles from "../modals/modal.module.css";
-// import ButtonPrimary from '../buttons/ButtonPrimary';
-
-// interface LoginModalProps{
-//     isOpen:boolean;
-//     onClose:()=>void;
-//     onSwitch:()=>void;
-// }
-
-// const LoginModal:React.FC<LoginModalProps>=({isOpen, onClose, onSwitch})=>{
-//     const [email, serEmail] = useState('');
-//     const [password, setPassword]=useState('');
-
-//     const handleLogin = () => {
-//         if (email==="aprytya@gmail.com" && password === "admin1234") {
-//             onClose
-//         }else{
-//             alert("Login Gagal!!! Periksa kembali email dan password Anda");
-//         }
-//     };
-
-//     return (
-//         <Modal isOpen={isOpen} onRequestClose={onClose}>
-//             <h2>Login</h2>
-//             <input type="email" placeholder="Email" value={email} onChange={(e)=>setPassword(e.target.value)}/>
-//             <input className={styles["password"]} type="password" value={password} onClick={handleLogin} />
-//               <ButtonPrimary  
-//                 width='400px'
-//                 height='50px'
-//                 marginLeft='20px'
-//                 name={'Login'} />
-//        <p className={styles["kata"]}> Don't have an account ? Klik <a href = "" onClick={onSwitch} className={styles["kata"]}>Here</a></p>
-//         </Modal>
-//     )
-
-// }
-
-// export default LoginModal;
-
-'use client'
-
+  'use client'
 import { Modal, Button } from 'react-bootstrap';
-import { ChangeEvent, useState } from 'react';
+import { LoginBodyRequest } from '@/entities/auth.entities';
+import React, { ChangeEvent, useState } from 'react';
 import styles from "../modals/modal.module.css";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import AuthUseCase from '@/use-case/auth.usecase';
 
 interface Props {
-  show:boolean
-  onHide:any
+  showLogin: boolean;
+  showRegister: boolean;
+  onHide: any;
+  setIsLoggedIn:React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LoginRegisterModal = ({show, onHide}:Props) => {
-  const [email, setemail] = useState<any>('');
-  const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [isLogin, setIsLogin] = useState(true);
-  const router = useRouter()
+interface FormEntity {
+  fullname: string;
+  email: string;
+  password: string;
+  // phone: string;
+}
 
-  const handleemailChange = (e:any) => {
-    setemail(e.target.value);
+const LoginRegisterModal = ({ showLogin, showRegister, onHide, setIsLoggedIn }: Props) => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [userData, setUserData] = useState<FormEntity>({
+    email: '',
+    password: '',
+    fullname: ''
+    // phone: ''
+  });
+  const [form, setForm] = useState<LoginBodyRequest>({
+    email: '',
+    password: ''
+  });
+  const { login } = AuthUseCase();
+  const router = useRouter();
+
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
   };
-
-  const handlePasswordChange = (e:any) => {
+  
+  const onChangeForm =  (e: ChangeEvent<HTMLInputElement>)=> {
+    setForm({
+      ...form,
+      [e.target.name]:e.target.value
+    })
+    console.log(form)
+  }
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
-  const handleFullNameChange = (e:any) => {
-    setFullName(e.target.value);
+  const handleSwitch = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    onHide();
+    setUserData({ email: '', password: '', fullname: '',  });
   };
 
-  
-  const handleSwitch = (e:any) => {
-    e.preventDefault(); 
-    setIsLogin(!isLogin);
-  }
+  const handleSubmitLogin = async (e: any) => {
+     login(form)
+   
 
-  const handleSubmit = (e:any) => {
+    onHide();
+  };
+
+  const handleSubmitRegister = async (e: any) => {
     e.preventDefault();
-    if (isLogin) {
-      console.log('email:', email);
-      console.log('Password:', password);
-      if (email === "aprytya@gmail.com" && password === "aprytya" ) {
-       router.push("/dashboard")
-      }else if(email === "admin@gmail.com" && password === "admin1234"){
-        router.push("/admin")
-      } else {
-        alert("Login Failed!!, Plase Check your Email and Password")
-      }
-    } else  {
-      console.log('Registered with email:', email);
-      console.log('Registered with Password:', password);
-      console.log('Registered with Fullname', fullName);
+
+    try {
+      console.log('Registered with email:', userData.email);
+      console.log('Registered with Password:', userData.password);
+      console.log('Registered with fullname', userData.fullname);
+      // console.log('Registered with phone', userData.phone);
+
+      const response = await axios.post('http://localhost:2711/api/v1/register', userData);
+      console.log('Registration Success', response.data);
+    } catch (error) {
+      console.error('Registration operation failed!', error);
+      alert('Registration operation failed! Please Check your information');
     }
+
     onHide();
   };
 
 
   return (
-    
-    <Modal show={show} onHide={onHide} centered >
-      <div className={styles["modal"]}>
-      <Modal.Title className = {styles["title"]}>{isLogin ? 'Login' : 'Register'}</Modal.Title>
-      <Modal.Body className={styles["modal.body"]}>
-        {isLogin ? (
-          <form onSubmit={handleSubmit}>
-              <input className={styles["email"]} type="text" value={email} onChange={handleemailChange} />
-              <input className={styles["password"]} type="password" value={password} onChange={handlePasswordChange} />
-              <Button id={styles["button"]} onClick={handleSubmit}>Login</Button>
-       <p className={styles["kata"]}> Don't have an account ? Klik <a href = "" onClick={handleSwitch} className={styles["kata"]}>Here</a></p>
-          </form>
-        ):(
-          <form onSubmit={handleSubmit} className={styles["modal"]} >
-           <input className={styles["email"]} type="text" value={email}  placeholder="Email" id='email' onChange={handleemailChange} />
-            <input className={styles["password"]} type="password" placeholder="Password" id='password'value={password} onChange={handlePasswordChange} />
-            <input className={styles["fullname"]} type="text" placeholder="Full Name" id='name' value={password} onChange={handlePasswordChange} />
-            <Button id={styles["button"]} type="submit">Register</Button>
-       <p className={styles["kata"]}>Already have an account ? Klik <a href="" onClick={handleSwitch}className={styles["kata"]}>Here</a></p>
-          </form>
-        )}
-      </Modal.Body>
-      </div>
-    </Modal>
-
+    <>
+      <Modal show={showLogin} onHide={onHide} centered>
+        <div className={styles['modal']}>
+          <Modal.Title className={styles['title']}>Login</Modal.Title>
+          <Modal.Body className={styles['modal.body']}>
+            <form onSubmit={handleSubmitLogin}>
+              <input className={styles['email']} type="text" value={form.email} name={"email"} onChange={onChangeForm} />
+              <input className={styles['password']} type="password" value={form.password}  name={"password"} onChange={onChangeForm} />
+              <Button id={styles['button']} onClick={handleSubmitLogin}>
+                Login
+              </Button>
+              <p className={styles['kata']}>
+                Don't have an account? Click <a href="#" onClick={handleSwitch} className={styles['kata']}>Here</a>
+              </p>
+            </form>
+          </Modal.Body>
+        </div>
+      </Modal>
+      <Modal show={showRegister} onHide={onHide} centered>
+        <div className={styles['modal']}>
+          <Modal.Title className={styles['title']}>Register</Modal.Title>
+          <Modal.Body className={styles['modal.body']}>
+            <form onSubmit={handleSubmitRegister} className={styles['modal']}>
+              <input className={styles['email']} type="text" value={userData.email} placeholder="Email" onChange={(e) => setUserData({ ...userData, email: e.target.value })} />
+              <input className={styles['password']} type="password" placeholder="Password" value={userData.password} onChange={(e) => setUserData({ ...userData, password: e.target.value })} />
+              <input className={styles['fullname']} type="text" placeholder="Full Name" value={userData.fullname} onChange={(e) => setUserData({ ...userData, fullname: e.target.value })} />
+              {/* <input className={styles['phone']} type="text" placeholder="Phone" value={userData.phone} onChange={(e) => setUserData({ ...userData, phone: e.target.value })} /> */}
+              <Button id={styles['button']} onClick={handleSubmitRegister}>
+                Register
+              </Button>
+              <p className={styles['kata']}>
+                Already have an account? Click <a href="#" onClick={handleSwitch} className={styles['kata']}>Here</a>
+              </p>
+            </form>
+          </Modal.Body>
+        </div>
+      </Modal>
+    </>
   );
 };
 
 export default LoginRegisterModal;
-
 
